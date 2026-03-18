@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/submit-lead.js": {
-      "runtime": "vercel@latest"
+      "runtime": "nodejs@18"
     }
   }
 }
