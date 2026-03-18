@@ -519,6 +519,75 @@
             font-size: 1rem;
         }
         
+        /* Contact Form */
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-success {
+            display: none;
+            padding: 1rem;
+            background: rgba(0, 177, 173, 0.2);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            color: var(--primary);
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .form-error {
+            display: none;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            border-radius: 8px;
+            color: #ef4444;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .form-loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
         /* CTA Section */
         .cta-section {
             padding: 6rem 2rem;
@@ -799,15 +868,37 @@
         </div>
     </section>
     
-    <!-- CTA Section -->
+    <!-- Contact Section with Form -->
     <section class="cta-section" id="contact">
         <div class="container">
             <div class="cta-card">
                 <h2>Ready to Transform Your Career?</h2>
-                <p>Join thousands of professionals who have already taken the first step into the AI revolution.</p>
-                <a href="https://goacademyai.com" class="btn btn-primary">
-                    Join Us Now →
-                </a>
+                <p>Fill out the form below and we'll be in touch!</p>
+                
+                <form class="contact-form" id="leadForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="Name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="Email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="Message" placeholder="Tell us about your goals..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        Submit Inquiry →
+                    </button>
+                </form>
+                
+                <div class="form-success" id="formSuccess">
+                    ✓ Thank you! We'll be in touch soon.
+                </div>
+                <div class="form-error" id="formError">
+                    ✗ Something went wrong. Please try again.
+                </div>
             </div>
         </div>
     </section>
@@ -844,6 +935,47 @@
         }, { threshold: 0.1 });
         
         fadeElements.forEach(el => observer.observe(el));
+        
+        // Contact Form Submission
+        const leadForm = document.getElementById('leadForm');
+        const formSuccess = document.getElementById('formSuccess');
+        const formError = document.getElementById('formError');
+        
+        leadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            leadForm.classList.add('form-loading');
+            formSuccess.style.display = 'none';
+            formError.style.display = 'none';
+            
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            
+            try {
+                const response = await fetch('/api/submit-lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    formSuccess.style.display = 'block';
+                    leadForm.reset();
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                formError.style.display = 'block';
+            } finally {
+                leadForm.classList.remove('form-loading');
+            }
+        });
     </script>
 </body>
 </html>
