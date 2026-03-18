@@ -6,7 +6,7 @@
     <title>Go Academy AI - Master AI. Real Skills for the Real World.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,20 +15,18 @@
         }
         
         :root {
-            /* GoAcademy AI Theme Colors */
+            /* GoAcademy AI Theme - Exact Colors */
             --bg-dark: #171A24;
             --bg-card: #1e2129;
             --bg-card-hover: #252830;
             --primary: #00b1ad;
             --primary-hover: #00d0c8;
-            --accent: #0693e3;
+            --accent-green: #39b54a;
+            --accent-blue: #0693e3;
             --text-primary: #ffffff;
             --text-secondary: #A9A7B0;
             --text-muted: #69727d;
-            --gradient-1: linear-gradient(135deg, #00b1ad 0%, #0693e3 100%);
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-            --shadow-glow: 0 0 40px rgba(0, 177, 173, 0.3);
+            --border-color: rgba(255, 255, 255, 0.08);
         }
         
         html {
@@ -36,14 +34,14 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
         }
         
-        /* Hero Background with AI Video */
+        /* Hero Background */
         .hero-bg {
             position: fixed;
             top: 0;
@@ -58,14 +56,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.4;
-        }
-        
-        .hero-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.5;
+            opacity: 0.35;
         }
         
         .hero-bg::after {
@@ -75,10 +66,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(23,26,36,0.7) 0%, rgba(23,26,36,0.9) 50%, rgba(23,26,36,1) 100%);
+            background: linear-gradient(180deg, rgba(23,26,36,0.75) 0%, rgba(23,26,36,0.95) 100%);
         }
         
-        /* Grid Pattern */
+        /* Subtle grid */
         .grid-pattern {
             position: fixed;
             top: 0;
@@ -86,10 +77,9 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 50px 50px;
             mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
         }
         
@@ -100,24 +90,22 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 1.25rem 2rem;
+            padding: 1rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(23, 26, 36, 0.9);
+            background: rgba(23, 26, 36, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
         }
         
         nav.scrolled {
-            padding: 1rem 2rem;
-            background: rgba(23, 26, 36, 0.98);
+            padding: 0.75rem 2.5rem;
         }
         
         .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--text-primary);
             text-decoration: none;
@@ -127,14 +115,14 @@
         }
         
         .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--gradient-1);
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
         
         .logo span {
@@ -143,7 +131,7 @@
         
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             align-items: center;
         }
         
@@ -151,64 +139,47 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
+            font-size: 0.9rem;
+            transition: color 0.2s;
         }
         
         .nav-links a:hover {
             color: var(--text-primary);
         }
         
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.75rem 1.75rem;
-            border-radius: 8px;
+            padding: 0.6rem 1.25rem;
+            border-radius: 4px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             cursor: pointer;
             border: none;
+            font-family: inherit;
         }
         
         .btn-primary {
             background: var(--primary);
             color: var(--bg-dark);
-            box-shadow: 0 4px 15px rgba(0, 177, 173, 0.3);
         }
         
         .btn-primary:hover {
             background: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 177, 173, 0.4);
+            transform: translateY(-1px);
         }
         
-        .btn-ghost {
+        .btn-outline {
             background: transparent;
             color: var(--text-primary);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
-        .btn-ghost:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
             border-color: var(--primary);
         }
         
@@ -218,13 +189,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 8rem 2rem 4rem;
-            position: relative;
+            padding: 7rem 2rem 4rem;
+            text-align: center;
         }
         
         .hero-content {
-            max-width: 900px;
-            text-align: center;
+            max-width: 800px;
             position: relative;
             z-index: 1;
         }
@@ -233,66 +203,53 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: rgba(0, 177, 173, 0.15);
-            border: 1px solid rgba(0, 177, 173, 0.3);
+            padding: 0.4rem 0.875rem;
+            background: rgba(0, 177, 173, 0.12);
+            border: 1px solid rgba(0, 177, 173, 0.25);
             border-radius: 100px;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
+            font-weight: 600;
             color: var(--primary);
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease;
-        }
-        
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         .hero h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
             font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease 0.1s backwards;
+            line-height: 1.15;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.02em;
         }
         
-        .hero h1 .gradient {
+        .hero h1 span {
             color: var(--primary);
         }
         
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
-            animation: fadeInUp 0.8s ease 0.2s backwards;
+            max-width: 540px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
         }
         
         .hero-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             justify-content: center;
             flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.3s backwards;
         }
         
         .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 4rem;
-            margin-top: 4rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            animation: fadeInUp 0.8s ease 0.4s backwards;
+            gap: 3rem;
+            margin-top: 3.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
         }
         
         .hero-stat {
@@ -300,101 +257,91 @@
         }
         
         .hero-stat-value {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 2rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--primary);
         }
         
         .hero-stat-label {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Section Styles */
+        /* Sections */
         .section {
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
             position: relative;
             z-index: 1;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
         }
         
         .section-label {
             display: inline-block;
-            font-size: 0.85rem;
-            font-weight: 600;
+            font-size: 0.7rem;
+            font-weight: 700;
             color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
         }
         
         .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
         }
         
         .section-subtitle {
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
+            font-size: 1rem;
+            max-width: 520px;
             margin: 0 auto;
         }
         
-        /* Features Section */
+        /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
         }
         
         .feature-card {
             background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.75rem;
+            transition: all 0.25s ease;
         }
         
         .feature-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             background: var(--bg-card-hover);
-            border-color: rgba(0, 177, 173, 0.3);
-            box-shadow: var(--shadow-lg);
+            border-color: rgba(0, 177, 173, 0.2);
         }
         
         .feature-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 12px;
+            width: 52px;
+            height: 52px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
             overflow: hidden;
-            background: rgba(0, 177, 173, 0.1);
         }
         
         .feature-icon img {
@@ -404,75 +351,78 @@
         }
         
         .feature-card h3 {
-            font-size: 1.25rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
         
         .feature-card p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
         
-        /* Courses Section */
+        /* Courses Grid */
         .courses-section {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.015);
         }
         
         .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
         }
         
         .course-card {
             background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
         
         .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(0, 177, 173, 0.3);
+            transform: translateY(-3px);
+            border-color: rgba(0, 177, 173, 0.25);
         }
         
         .course-header {
-            padding: 1.75rem;
-            background: linear-gradient(135deg, rgba(0, 177, 173, 0.2) 0%, rgba(6, 147, 227, 0.2) 100%);
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 177, 173, 0.15) 0%, rgba(6, 147, 227, 0.15) 100%);
         }
         
         .course-card:nth-child(2) .course-header {
-            background: linear-gradient(135deg, rgba(6, 147, 227, 0.2) 0%, rgba(0, 177, 173, 0.2) 100%);
+            background: linear-gradient(135deg, rgba(6, 147, 227, 0.15) 0%, rgba(57, 181, 74, 0.15) 100%);
         }
         
         .course-card:nth-child(3) .course-header {
-            background: linear-gradient(135deg, rgba(0, 177, 173, 0.2) 0%, rgba(6, 147, 227, 0.2) 100%);
+            background: linear-gradient(135deg, rgba(57, 181, 74, 0.15) 0%, rgba(0, 177, 173, 0.15) 100%);
         }
         
         .course-card:nth-child(4) .course-header {
-            background: linear-gradient(135deg, rgba(6, 147, 227, 0.2) 0%, rgba(0, 177, 173, 0.2) 100%);
+            background: linear-gradient(135deg, rgba(0, 177, 173, 0.15) 0%, rgba(6, 147, 227, 0.15) 100%);
         }
         
         .course-icon {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            margin-bottom: 0.35rem;
         }
         
         .course-header h3 {
-            font-size: 1.15rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
             font-weight: 600;
         }
         
         .course-body {
-            padding: 1.5rem;
+            padding: 1.25rem;
         }
         
         .course-body p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            line-height: 1.6;
         }
         
         .course-meta {
@@ -481,48 +431,67 @@
             gap: 1rem;
             margin-top: 1rem;
             padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .course-meta span {
-            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
         
         /* Stats Section */
         .stats-section {
-            padding: 5rem 2rem;
-            background: linear-gradient(180deg, transparent 0%, rgba(0, 177, 173, 0.05) 50%, transparent 100%);
+            padding: 4rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 177, 173, 0.03) 50%, transparent 100%);
         }
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
             text-align: center;
         }
         
-        .stat-item {
-            padding: 2rem;
-        }
-        
         .stat-value {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
         
         .stat-label {
             color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
         
-        /* Contact Form */
-        .contact-form {
-            max-width: 500px;
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 2rem;
+        }
+        
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            max-width: 520px;
             margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-card h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        
+        .contact-card > p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        
+        /* Form Styles */
+        .contact-form {
             text-align: left;
         }
         
@@ -532,22 +501,23 @@
         
         .form-group label {
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 600;
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.875rem 1rem;
+            padding: 0.75rem 1rem;
             background: var(--bg-dark);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-family: inherit;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.2s;
         }
         
         .form-group input:focus,
@@ -558,74 +528,48 @@
         
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
         
         .form-success {
             display: none;
-            padding: 1rem;
-            background: rgba(0, 177, 173, 0.2);
-            border: 1px solid var(--primary);
-            border-radius: 8px;
-            color: var(--primary);
+            padding: 0.875rem;
+            background: rgba(57, 181, 74, 0.15);
+            border: 1px solid var(--accent-green);
+            border-radius: 4px;
+            color: var(--accent-green);
             text-align: center;
             margin-top: 1rem;
+            font-size: 0.9rem;
         }
         
         .form-error {
             display: none;
-            padding: 1rem;
-            background: rgba(239, 68, 68, 0.2);
+            padding: 0.875rem;
+            background: rgba(239, 68, 68, 0.15);
             border: 1px solid #ef4444;
-            border-radius: 8px;
+            border-radius: 4px;
             color: #ef4444;
             text-align: center;
             margin-top: 1rem;
+            font-size: 0.9rem;
         }
         
         .form-loading {
-            opacity: 0.7;
+            opacity: 0.6;
             pointer-events: none;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-        
-        .cta-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 4rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .cta-card h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(1.75rem, 3vw, 2.5rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .cta-card p {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
         }
         
         /* Footer */
         footer {
-            padding: 3rem 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
             text-align: center;
         }
         
         footer p {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
         
         footer a {
@@ -633,48 +577,34 @@
             text-decoration: none;
         }
         
-        footer a:hover {
-            text-decoration: underline;
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero-stats {
-                flex-direction: column;
-                gap: 2rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
-            }
-        }
-        
-        /* Fade animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
         }
         
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .hero-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 100%; max-width: 240px; justify-content: center; }
+        }
     </style>
 </head>
 <body>
-    <!-- Hero Background with AI Video -->
+    <!-- Hero Background -->
     <div class="hero-bg">
         <video autoplay muted loop playsinline>
             <source src="assets/hero-video-new.mp4" type="video/mp4" />
@@ -691,7 +621,7 @@
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#courses">Courses</a>
-            <a href="#stats">Impact</a>
+            <a href="#stats">Why AI</a>
             <a href="#contact">Contact</a>
             <a href="#contact" class="btn btn-primary">Get Certified</a>
         </div>
@@ -700,35 +630,25 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <div class="badge">
-                <span class="badge-dot"></span>
-                New: AI Courses for 2026
-            </div>
-            <h1>
-                Master AI.<br>
-                <span class="gradient">Real Skills</span> for the Real World.
-            </h1>
+            <div class="badge">New Courses for 2026</div>
+            <h1>Master AI.<br><span>Real Skills</span> for the Real World.</h1>
             <p>Grow Your Skills, Get Certified in Generative AI. Join thousands of professionals transforming their careers with AI expertise.</p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">
-                    Get Certified →
-                </a>
-                <a href="#courses" class="btn btn-ghost">
-                    Explore Masterclasses
-                </a>
+                <a href="#contact" class="btn btn-primary">Get Certified →</a>
+                <a href="#courses" class="btn btn-outline">Explore Courses</a>
             </div>
             <div class="hero-stats">
                 <div class="hero-stat">
                     <div class="hero-stat-value">50K+</div>
-                    <div class="hero-stat-label">Students Trained</div>
+                    <div class="hero-stat-label">Students</div>
                 </div>
                 <div class="hero-stat">
                     <div class="hero-stat-value">100+</div>
-                    <div class="hero-stat-label">Expert Instructors</div>
+                    <div class="hero-stat-label">Instructors</div>
                 </div>
                 <div class="hero-stat">
                     <div class="hero-stat-value">4.9</div>
-                    <div class="hero-stat-label">Average Rating</div>
+                    <div class="hero-stat-label">Rating</div>
                 </div>
             </div>
         </div>
@@ -745,7 +665,7 @@
             <div class="features-grid">
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
-                        <img src="assets/feature-1-new.png" alt="Expert Instructors" />
+                        <img src="assets/feature-1-new.png" alt="Expert" />
                     </div>
                     <h3>Expert-Led Training</h3>
                     <p>Learn from industry veterans with years of hands-on AI implementation experience.</p>
@@ -766,10 +686,10 @@
                 </div>
                 <div class="feature-card fade-in">
                     <div class="feature-icon">
-                        <img src="assets/feature-4-new.png" alt="Career Growth" />
+                        <img src="assets/feature-4-new.png" alt="Career" />
                     </div>
-                    <h3>Career Transformation</h3>
-                    <p>Gain practical AI skills that directly impact your career growth.</p>
+                    <h3>Career Growth</h3>
+                    <p>Gain practical AI skills that directly impact your career advancement.</p>
                 </div>
             </div>
         </div>
@@ -781,7 +701,7 @@
             <div class="section-header">
                 <span class="section-label">Our Programs</span>
                 <h2 class="section-title">Generative AI Learning Paths</h2>
-                <p class="section-subtitle">Comprehensive learning paths for every business need.</p>
+                <p class="section-subtitle">Comprehensive courses for every business need.</p>
             </div>
             <div class="courses-grid">
                 <div class="course-card">
@@ -790,7 +710,7 @@
                         <h3>AI Marketing Masterclass</h3>
                     </div>
                     <div class="course-body">
-                        <p>Transform marketing campaigns with Generative AI. Learn to create targeted campaigns and optimize results.</p>
+                        <p>Transform marketing campaigns with Generative AI. Create targeted campaigns and optimize results.</p>
                         <div class="course-meta">
                             <span>📅 8 Weeks</span>
                             <span>⭐ 4.9</span>
@@ -829,7 +749,7 @@
                         <h3>AI Superhuman Masterclass</h3>
                     </div>
                     <div class="course-body">
-                        <p>Boost productivity with AI capabilities. Learn to work smarter with AI-powered tools.</p>
+                        <p>Boost productivity with AI capabilities. Work smarter with AI-powered workflows.</p>
                         <div class="course-meta">
                             <span>📅 4 Weeks</span>
                             <span>⭐ 4.9</span>
@@ -850,55 +770,51 @@
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-value">75%</div>
-                    <div class="stat-label">of small businesses haven't used AI yet</div>
+                    <div class="stat-label">of businesses haven't adopted AI yet</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">85M</div>
-                    <div class="stat-label">jobs displaced by 2025 (WEF)</div>
+                    <div class="stat-label">jobs displaced by 2025</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">$13T</div>
-                    <div class="stat-label">AI economic impact by 2030</div>
+                    <div class="stat-label">economic impact by 2030</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">$110B</div>
-                    <div class="stat-label">global AI spending by 2024</div>
+                    <div class="stat-label">global AI spending</div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Contact Section with Form -->
-    <section class="cta-section" id="contact">
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
         <div class="container">
-            <div class="cta-card">
-                <h2>Ready to Transform Your Career?</h2>
-                <p>Fill out the form below and we'll be in touch!</p>
+            <div class="contact-card">
+                <h2>Get In Touch</h2>
+                <p>Have questions? Fill out the form below and we'll respond within 24 hours.</p>
                 
                 <form class="contact-form" id="leadForm">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="Name" required placeholder="John Doe">
+                        <input type="text" id="name" required placeholder="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="Email" required placeholder="john@example.com">
+                        <input type="email" id="email" required placeholder="john@example.com">
                     </div>
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="Message" placeholder="Tell us about your goals..."></textarea>
+                        <textarea id="message" placeholder="Tell us about your goals..."></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        Submit Inquiry →
+                        Send Message →
                     </button>
                 </form>
                 
-                <div class="form-success" id="formSuccess">
-                    ✓ Thank you! We'll be in touch soon.
-                </div>
-                <div class="form-error" id="formError">
-                    ✗ Something went wrong. Please try again.
-                </div>
+                <div class="form-success" id="formSuccess">✓ Thank you! We'll be in touch soon.</div>
+                <div class="form-error" id="formError">✗ Something went wrong. Please try again.</div>
             </div>
         </div>
     </section>
@@ -906,71 +822,54 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2026 <a href="https://goacademyai.com">Go Academy AI</a>. A product of Academy Of AI Sdn Bhd.</p>
+            <p>© 2026 <a href="https://goacademyai.com">Go Academy AI</a>. Academy Of AI Sdn Bhd.</p>
             <p style="margin-top: 0.5rem; color: var(--text-muted);">
-                Puchong, Selangor, Malaysia • <a href="mailto:info@goacademyai.com">info@goacademyai.com</a> • +6012-462 2768
+                Puchong, Selangor, Malaysia • <a href="mailto:info@goacademyai.com">info@goacademyai.com</a>
             </p>
         </div>
     </footer>
     
     <script>
-        // Navbar scroll effect
+        // Navbar scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
         
         // Fade in on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
         
-        fadeElements.forEach(el => observer.observe(el));
-        
-        // Contact Form Submission
+        // Contact Form
         const leadForm = document.getElementById('leadForm');
         const formSuccess = document.getElementById('formSuccess');
         const formError = document.getElementById('formError');
         
         leadForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Show loading state
             leadForm.classList.add('form-loading');
             formSuccess.style.display = 'none';
             formError.style.display = 'none';
-            
-            // Collect form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
-            };
             
             try {
                 const response = await fetch('/api/submit-lead', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify({
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        message: document.getElementById('message').value
+                    })
                 });
-                
                 if (response.ok) {
                     formSuccess.style.display = 'block';
                     leadForm.reset();
-                } else {
-                    throw new Error('Submission failed');
-                }
+                } else throw new Error('Failed');
             } catch (error) {
-                console.error('Error:', error);
                 formError.style.display = 'block';
             } finally {
                 leadForm.classList.remove('form-loading');
