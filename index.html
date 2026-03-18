@@ -4,370 +4,906 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Go Academy AI - Master AI. Real Skills for the Real World.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
+        
         :root {
-            --primary: #1a1a2e;
-            --secondary: #16213e;
-            --accent: #7c3aed;
-            --accent-light: #a78bfa;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #1a1a25;
+            --primary: #6366f1;
+            --primary-hover: #818cf8;
+            --accent: #f472b6;
+            --accent-2: #22d3ee;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --gradient-1: linear-gradient(135deg, #6366f1 0%, #f472b6 100%);
+            --gradient-2: linear-gradient(135deg, #22d3ee 0%, #6366f1 100%);
+            --gradient-hero: radial-gradient(ellipse at top, #1e1b4b 0%, #0a0a0f 50%);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.3);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--gradient-hero);
+            opacity: 0.5;
+        }
+        
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(244, 114, 182, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(34, 211, 238, 0.08) 0%, transparent 40%);
+        }
+        
+        /* Grid Pattern */
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
         }
         
         /* Navigation */
         nav {
-            background: var(--primary);
-            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
+        
+        nav.scrolled {
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 15, 0.95);
+        }
+        
         .logo {
-            color: var(--text-light);
+            font-family: 'Space Grotesk', sans-serif;
             font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .logo span {
-            color: var(--accent-light);
-        }
-        .nav-links a {
-            color: var(--text-light);
+            font-weight: 700;
+            color: var(--text-primary);
             text-decoration: none;
-            margin-left: 2rem;
-            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+        
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .logo span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+        
         .nav-links a:hover {
-            color: var(--accent-light);
+            color: var(--text-primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.5);
+        }
+        
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--text-light);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 900px;
             text-align: center;
-            padding: 6rem 2rem 4rem;
+            position: relative;
+            z-index: 1;
         }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--primary-hover);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
         .hero h1 {
-            font-size: 3.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
             margin-bottom: 1.5rem;
-            line-height: 1.2;
+            animation: fadeInUp 0.8s ease 0.1s backwards;
         }
-        .hero h1 span {
-            color: var(--accent-light);
+        
+        .hero h1 .gradient {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
+        
+        .hero h1 .gradient-2 {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
         .hero p {
             font-size: 1.25rem;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             max-width: 600px;
-            margin: 0 auto 2rem;
+            margin: 0 auto 2.5rem;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
         }
-        .btn {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.3s backwards;
         }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            animation: fadeInUp 0.8s ease 0.4s backwards;
+        }
+        
+        .hero-stat {
+            text-align: center;
+        }
+        
+        .hero-stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .hero-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         /* Features Section */
-        .features {
-            padding: 5rem 2rem;
-            background: #f8fafc;
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 1;
         }
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .section-title p {
-            color: var(--text-muted);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+        
+        .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        .feature-card h3 {
+        
+        .section-label {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
             color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             margin-bottom: 1rem;
-            font-size: 1.25rem;
         }
+        
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            background: var(--bg-card-hover);
+            border-color: rgba(99, 102, 241, 0.2);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card:nth-child(2) .feature-icon {
+            background: rgba(244, 114, 182, 0.1);
+        }
+        
+        .feature-card:nth-child(3) .feature-icon {
+            background: rgba(34, 211, 238, 0.1);
+        }
+        
+        .feature-card:nth-child(4) .feature-icon {
+            background: rgba(99, 102, 241, 0.1);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
         .feature-card p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
         
         /* Courses Section */
-        .courses {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        .courses-section {
+            background: rgba(255, 255, 255, 0.02);
         }
-        .course-grid {
+        
+        .courses-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
+        
         .course-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
             overflow: hidden;
-            transition: box-shadow 0.3s;
+            transition: all 0.4s ease;
         }
+        
         .course-card:hover {
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(99, 102, 241, 0.3);
         }
+        
         .course-header {
-            background: var(--accent);
-            color: white;
-            padding: 1.5rem;
+            padding: 1.75rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(244, 114, 182, 0.2) 100%);
+            position: relative;
+            overflow: hidden;
         }
+        
+        .course-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .course-card:nth-child(2) .course-header {
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.2) 0%, rgba(34, 211, 238, 0.2) 100%);
+        }
+        
+        .course-card:nth-child(3) .course-header {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2) 0%, rgba(99, 102, 241, 0.2) 100%);
+        }
+        
+        .course-card:nth-child(4) .course-header {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(244, 114, 182, 0.2) 100%);
+        }
+        
+        .course-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
         .course-header h3 {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
         }
+        
         .course-body {
             padding: 1.5rem;
         }
+        
         .course-body p {
-            color: var(--text-muted);
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
         
-        /* Stats Section */
-        .stats {
-            background: var(--primary);
-            padding: 4rem 2rem;
-            color: var(--text-light);
+        .course-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
+        
+        .course-meta span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, transparent 0%, rgba(99, 102, 241, 0.05) 50%, transparent 100%);
+        }
+        
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
             text-align: center;
-        }
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--accent-light);
-            margin-bottom: 0.5rem;
-        }
-        .stat-item p {
-            color: var(--text-muted);
         }
         
-        /* Contact Section */
-        .contact {
-            padding: 5rem 2rem;
-            background: #f8fafc;
+        .stat-item {
+            padding: 2rem;
+        }
+        
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
             text-align: center;
         }
-        .contact-info {
-            max-width: 600px;
+        
+        .cta-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            overflow: hidden;
         }
-        .contact-info p {
+        
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+        }
+        
+        .cta-card h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--text-muted);
         }
-        .contact-info a {
-            color: var(--accent);
-            text-decoration: none;
+        
+        .cta-card p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
         
         /* Footer */
         footer {
-            background: var(--primary);
-            color: var(--text-muted);
-            padding: 2rem;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
         }
+        
         footer p {
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
         
+        footer a {
+            color: var(--primary-hover);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
             .nav-links {
                 display: none;
             }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+        }
+        
+        /* Animations on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div class="grid-pattern"></div>
+    
     <!-- Navigation -->
-    <nav>
-        <div class="logo">GoAcademy<span>AI</span></div>
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">🚀</div>
+            GoAcademy<span>AI</span>
+        </a>
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#courses">Courses</a>
-            <a href="#stats">Stats</a>
+            <a href="#stats">Impact</a>
             <a href="#contact">Contact</a>
+            <a href="#contact" class="btn btn-primary">Get Started</a>
         </div>
     </nav>
     
     <!-- Hero Section -->
     <section class="hero">
-        <div>
-            <h1>Master AI.<br><span>Real Skills for the Real World.</span></h1>
-            <p>Grow Your Skills, Get Certified in Generative AI. Join thousands of professionals transforming their careers with AI expertise.</p>
-            <a href="#contact" class="btn">Join Us Now</a>
+        <div class="hero-content">
+            <div class="badge">
+                <span class="badge-dot"></span>
+                Trusted by 2,500+ Professionals Worldwide
+            </div>
+            <h1>
+                Master AI.<br>
+                <span class="gradient">Real Skills</span> for the <span class="gradient-2">Real World.</span>
+            </h1>
+            <p>Transform your career with certified AI programs. Join thousands of marketers, entrepreneurs, and business leaders mastering generative AI.</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn btn-primary">
+                    Start Learning Now →
+                </a>
+                <a href="#courses" class="btn btn-ghost">
+                    Explore Courses
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">50K+</div>
+                    <div class="hero-stat-label">Students Trained</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">100+</div>
+                    <div class="hero-stat-label">Expert Instructors</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">4.9</div>
+                    <div class="hero-stat-label">Average Rating</div>
+                </div>
+            </div>
         </div>
     </section>
     
     <!-- Features Section -->
-    <section class="features" id="about">
-        <div class="section-title">
-            <h2>Why Choose Go Academy AI?</h2>
-            <p>We provide comprehensive AI education to help you stay ahead in the AI revolution.</p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card">
-                <h3>🎓 Expert-Led Training</h3>
-                <p>Learn from industry experts with years of hands-on experience in AI implementation.</p>
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Why Go Academy AI</span>
+                <h2 class="section-title">Your AI Journey Starts Here</h2>
+                <p class="section-subtitle">We combine expert-led training with hands-on projects to transform your career.</p>
             </div>
-            <div class="feature-card">
-                <h3>📜 Certified Programs</h3>
-                <p>Earn recognized certifications that validate your AI skills to employers worldwide.</p>
-            </div>
-            <div class="feature-card">
-                <h3>🌐 Global Community</h3>
-                <p>Connect with like-minded innovators and grow your professional network.</p>
-            </div>
-            <div class="feature-card">
-                <h3>💼 Career Growth</h3>
-                <p>Transform your career with practical AI skills that employers are seeking.</p>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Expert-Led Training</h3>
+                    <p>Learn from industry veterans with years of hands-on AI implementation experience across Fortune 500 companies.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📜</div>
+                    <h3>Certified Programs</h3>
+                    <p>Earn recognized certifications that validate your AI skills to employers and clients worldwide.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Global Community</h3>
+                    <p>Connect with 50,000+ innovators worldwide. Access exclusive forums, events, and networking opportunities.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💼</div>
+                    <h3>Career Transformation</h3>
+                    <p>From marketing to business operations—gain practical skills that directly impact your career growth.</p>
+                </div>
             </div>
         </div>
     </section>
     
     <!-- Courses Section -->
-    <section class="courses" id="courses">
-        <div class="section-title">
-            <h2>Our Masterclass Programs</h2>
-            <p>Comprehensive learning paths for every goal.</p>
-        </div>
-        <div class="course-grid">
-            <div class="course-card">
-                <div class="course-header">
-                    <h3>🎯 AI Marketing Masterclass</h3>
-                </div>
-                <div class="course-body">
-                    <p>Transform marketing campaigns with Generative AI. Learn to create targeted campaigns, analyze data, and optimize results.</p>
-                </div>
+    <section class="section courses-section" id="courses">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Our Programs</span>
+                <h2 class="section-title">Masterclass Courses</h2>
+                <p class="section-subtitle">Comprehensive learning paths designed for every goal and skill level.</p>
             </div>
-            <div class="course-card">
-                <div class="course-header">
-                    <h3>✍️ AI Content Creation</h3>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-icon">🎯</div>
+                        <h3>AI Marketing Masterclass</h3>
+                    </div>
+                    <div class="course-body">
+                        <p>Transform marketing campaigns with generative AI. Learn to create targeted campaigns, analyze data, and optimize results.</p>
+                        <div class="course-meta">
+                            <span>📅 8 Weeks</span>
+                            <span>⭐ 4.9</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="course-body">
-                    <p>Produce on-brand creative content using AI. Master content generation, editing, and distribution strategies.</p>
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-icon">✍️</div>
+                        <h3>AI Content Creation</h3>
+                    </div>
+                    <div class="course-body">
+                        <p>Produce on-brand creative content at scale. Master generation, editing, and distribution with AI-powered tools.</p>
+                        <div class="course-meta">
+                            <span>📅 6 Weeks</span>
+                            <span>⭐ 4.8</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="course-card">
-                <div class="course-header">
-                    <h3>🏢 AI Business Masterclass</h3>
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-icon">🏢</div>
+                        <h3>AI Business Masterclass</h3>
+                    </div>
+                    <div class="course-body">
+                        <p>Enhance business operations and strategy. Streamline processes and drive growth with intelligent AI solutions.</p>
+                        <div class="course-meta">
+                            <span>📅 10 Weeks</span>
+                            <span>⭐ 4.9</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="course-body">
-                    <p>Enhance business operations and strategy with AI. Streamline processes and drive growth with intelligent solutions.</p>
-                </div>
-            </div>
-            <div class="course-card">
-                <div class="course-header">
-                    <h3>⚡ AI Superhuman Masterclass</h3>
-                </div>
-                <div class="course-body">
-                    <p>Boost productivity with AI capabilities. Learn to work smarter with AI-powered tools and workflows.</p>
+                <div class="course-card">
+                    <div class="course-header">
+                        <div class="course-icon">⚡</div>
+                        <h3>AI Superhuman Masterclass</h3>
+                    </div>
+                    <div class="course-body">
+                        <p>Boost productivity 10x. Learn to work smarter with AI-powered workflows, automation, and smart tools.</p>
+                        <div class="course-meta">
+                            <span>📅 4 Weeks</span>
+                            <span>⭐ 4.9</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     
     <!-- Stats Section -->
-    <section class="stats" id="stats">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <h3>75%</h3>
-                <p>of small businesses have not used AI yet</p>
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">The AI Revolution</span>
+                <h2 class="section-title">Why Learn AI Now?</h2>
             </div>
-            <div class="stat-item">
-                <h3>85M</h3>
-                <p>jobs will be displaced by AI by 2025 (WEF)</p>
-            </div>
-            <div class="stat-item">
-                <h3>$13T</h3>
-                <p>AI contribution to global economy by 2030</p>
-            </div>
-            <div class="stat-item">
-                <h3>$110B</h3>
-                <p>Global AI spending by 2024</p>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">75%</div>
+                    <div class="stat-label">of businesses haven't adopted AI yet</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">85M</div>
+                    <div class="stat-label">jobs displaced by 2025 (WEF)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$13T</div>
+                    <div class="stat-label">AI economic impact by 2030</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">$110B</div>
+                    <div class="stat-label">global AI spending by 2024</div>
+                </div>
             </div>
         </div>
     </section>
     
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="section-title">
-            <h2>Get In Touch</h2>
-            <p>Ready to start your AI journey? Contact us today!</p>
-        </div>
-        <div class="contact-info">
-            <p>📍 No. H-7-2, Block H, Setiawalk, Persiaran Wawasan,<br>Pusat Bandar Puchong, 47160 Puchong, Selangor, Malaysia</p>
-            <p>📧 <a href="mailto:info@goacademyai.com">info@goacademyai.com</a></p>
-            <p>📞 +6012-462 2768</p>
-            <br>
-            <a href="https://goacademyai.com" class="btn">Visit Full Website</a>
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <div class="cta-card">
+                <h2>Ready to Transform Your Career?</h2>
+                <p>Join thousands of professionals who have already taken the first step into the AI revolution.</p>
+                <a href="https://goacademyai.com" class="btn btn-primary">
+                    Enroll Today →
+                </a>
+                <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted);">
+                    Or <a href="https://goacademyai.com/contact" style="color: var(--primary-hover);">book a free consultation</a>
+                </p>
+            </div>
         </div>
     </section>
     
     <!-- Footer -->
     <footer>
-        <p>© 2026 Go Academy AI. A product of Academy Of AI Sdn Bhd.</p>
+        <div class="container">
+            <p>© 2026 <a href="https://goacademyai.com">Go Academy AI</a>. A product of <a href="#">Academy Of AI Sdn Bhd</a>.</p>
+            <p style="margin-top: 0.5rem; color: var(--text-muted);">
+                Puchong, Selangor, Malaysia • <a href="mailto:info@goacademyai.com">info@goacademyai.com</a> • +6012-462 2768
+            </p>
+        </div>
     </footer>
+    
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Fade in on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
